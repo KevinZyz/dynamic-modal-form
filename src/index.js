@@ -14,10 +14,13 @@ function App() {
     setModalVisible(true);
   };
 
+  /** 弹窗点击确定时，执行的回调函数 */
   const handleModalOk = () => {
+    /** 获取到表单组件的实例 */
     const formContext = formRef.current;
     const { form } = formContext.props;
 
+    /** 获取到表单域所有值 */
     form.validateFields((err, values) => {
       if (err) {
         return;
@@ -26,10 +29,13 @@ function App() {
       console.log("Received values of form: ", values);
     });
   };
+
+  /** 弹窗点击取消时，执行的回调函数 */
   const handleModalCancel = () => {
     setModalVisible(false);
   };
 
+  /** 渲染弹窗内容 */
   const renderModalContent = () => {
     const props = {
       formItemMap: formA(),
@@ -47,7 +53,8 @@ function App() {
     return <FormCmpt {...props} />;
   };
 
-  const renderModalCmpt = content => {
+  /** 渲染弹窗组件 */
+  const renderModalCmpt = () => {
     const props = {
       title: "Basic Modal",
       visible: modalVisible,
