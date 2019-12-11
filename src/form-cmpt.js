@@ -19,21 +19,23 @@ import { Form } from "antd";
 //   );
 // };
 
+/** 表单组件 */
 class FormCmpt extends PureComponent {
   /** 渲染表单的每一项 */
   renderFormItem = item => {
     const {
       fieldName,
-      fieldOptions,
-      label,
+      fieldOptions = {},
+      label = "",
       cmpt,
-      cmptProps,
-      hidden,
+      cmptProps = {},
+      hidden = false,
       dynamicHidden
     } = item;
     const { form } = this.props;
     const { getFieldDecorator } = form;
     let hiddenItem = hidden;
+    /** 动态隐藏 */
     if (dynamicHidden) {
       const values = form.getFieldsValue();
       const value = values[fieldName];
@@ -46,7 +48,7 @@ class FormCmpt extends PureComponent {
         style={hiddenItem && { display: "none" }}
       >
         {getFieldDecorator(fieldName, fieldOptions)(
-          cmpt({ form, ...cmptProps })
+          cmpt && cmpt({ form, ...cmptProps })
         )}
       </Form.Item>
     );
