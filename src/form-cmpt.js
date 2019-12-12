@@ -1,6 +1,5 @@
 import React, { PureComponent } from "react";
 import { Form } from "antd";
-
 // const FormCmpt = props => {
 //   const { formDataSource, form } = props;
 //   const { getFieldDecorator } = form;
@@ -41,6 +40,7 @@ class FormCmpt extends PureComponent {
       const value = values[fieldName];
       hiddenItem = dynamicHidden(value, values);
     }
+
     return (
       <Form.Item
         label={label}
@@ -53,6 +53,7 @@ class FormCmpt extends PureComponent {
       </Form.Item>
     );
   };
+
   render() {
     const { formItemMap, formItemLayout } = this.props;
 

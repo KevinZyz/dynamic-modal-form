@@ -8,6 +8,7 @@ const ModalCmpt = props => {
     const { content } = props;
     return content;
   };
+
   return (
     <Modal
       title="Basic Modal"

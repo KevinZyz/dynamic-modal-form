@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useCallback } from "react";
 import ReactDOM from "react-dom";
 import ModalCmpt from "./modal-cmpt";
 import FormCmpt from "./form-cmpt";
@@ -15,7 +15,7 @@ function App() {
   };
 
   /** 弹窗点击确定时，执行的回调函数 */
-  const handleModalOk = () => {
+  const handleModalOk = useCallback(() => {
     /** 获取到表单组件的实例 */
     const formContext = formRef.current;
     const { form } = formContext.props;
@@ -28,18 +28,19 @@ function App() {
 
       console.log("Received values of form: ", values);
     });
-  };
+  }, []);
 
   /** 弹窗点击取消时，执行的回调函数 */
-  const handleModalCancel = () => {
+  const handleModalCancel = useCallback(() => {
     setModalVisible(false);
-  };
+  }, []);
 
-  /** 渲染弹窗内容 */
-  const renderModalContent = () => {
+  /** 渲染弹窗主体内容 */
+  const renderModalContent = useCallback(() => {
     const props = {
       formItemMap: formA(),
       wrappedComponentRef: formRef,
+      showTabs: true,
       formItemLayout: {
         labelCol: { span: 4 },
         wrapperCol: { span: 18 }
@@ -52,7 +53,7 @@ function App() {
       }
     };
     return <FormCmpt {...props} />;
-  };
+  }, []);
 
   /** 渲染弹窗组件 */
   const renderModalCmpt = () => {
